@@ -1,0 +1,14 @@
+{
+  "name": "curso-udemy-api",
+  "version": "1.0.0",
+  "description": "REST API Practice",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "Dario Skidelsky",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
