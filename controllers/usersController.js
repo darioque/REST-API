@@ -18,6 +18,20 @@ module.exports = {
     },
 
     login: async (req, res) => {
-        res.send("login page");
+        const userData = { ...req.body };
+        usersService.login(userData, (error, results) => {
+            if (error) {
+                console.log(error);
+                return res
+                    .status(400)
+                    .json({ success: 0, data: error });
+            }
+            return res.status(200).json({
+                success: 1,
+                data: results,
+            });
+        });
     },
-};
+
+
+}
