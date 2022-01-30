@@ -82,7 +82,7 @@ router.post("/add-post", postsController.addPost);
  *              description: Bad request
  */
 
-router.post('/add-post-comment', postsController.addPostComment)
+router.post("/add-post-comment", postsController.addPostComment);
 // Swagger documentation
 /**
  * @swagger
@@ -122,13 +122,95 @@ router.post('/add-post-comment', postsController.addPostComment)
  *              description: Bad request
  */
 
-router.get('/post-all-comments', postsController.listPostComments)
+router.get("/post-all-comments", postsController.listPostComments);
 // Swagger documentation
 /**
  * @swagger
  * /posts/post-all-comments:
  *   get:
  *      description: Used to get a list of all comments in a specific post
+ *      tags:
+ *          - posts
+ *      parameters:
+ *          - in: query
+ *            name: postId
+ *            type: integer
+ *            description: Post id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Success
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
+router.put("/like-post", postsController.likePost);
+/**
+ * @swagger
+ * /posts/like-post:
+ *   put:
+ *      description: Used to like post
+ *      tags:
+ *          - posts
+ *      parameters:
+ *          - in: body
+ *            name: Post
+ *            description: Post data
+ *            schema:
+ *              type: object
+ *              required:
+ *                 - postId
+ *              properties:
+ *                  postId:
+ *                      type: integer
+ *                      example: 1074
+ *      responses:
+ *          '200':
+ *              description: Resource added successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
+router.put("/dislike-post", postsController.dislikePost);
+/**
+ * @swagger
+ * /posts/dislike-post:
+ *   put:
+ *      description: Used to dilike post
+ *      tags:
+ *          - posts
+ *      parameters:
+ *          - in: body
+ *            name: Post
+ *            description: Post data
+ *            schema:
+ *              type: object
+ *              required:
+ *                 - postId
+ *              properties:
+ *                  postId:
+ *                      type: integer
+ *                      example: 1074
+ *      responses:
+ *          '200':
+ *              description: Resource added successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
+router.delete('/delete-post', postsController.deletePost)
+// Swagger documentation
+/**
+ * @swagger
+ * /posts/delete-post:
+ *   delete:
+ *      description: Used to delete a post
  *      tags:
  *          - posts
  *      parameters:
