@@ -4,7 +4,7 @@ const router = express.Router();
 
 const postsController = require("../controllers/postsController");
 
-router.get("/all-posts", postsController.list);
+router.get("/all-posts", postsController.listPosts);
 // Swagger documentation
 /**
  * @swagger
@@ -82,5 +82,67 @@ router.post("/add-post", postsController.addPost);
  *              description: Bad request
  */
 
+router.post('/add-post-comment', postsController.addPostComment)
+// Swagger documentation
+/**
+ * @swagger
+ * /posts/add-post-comment:
+ *   post:
+ *      description: Used to add comments to posts
+ *      tags:
+ *          - posts
+ *      parameters:
+ *          - in: body
+ *            name: Post
+ *            description: Comment data
+ *            schema:
+ *              type: object
+ *              required:
+ *                 - postId
+ *                 - comment
+ *                 - addedByUserId
+ *              properties:
+ *                  postId:
+ *                      type: integer
+ *                      example: 1074
+ *                  comment:
+ *                      type: string
+ *                      minLength: 1
+ *                      maxLength: 1000
+ *                      example: This is a sample comment
+ *                  addedByUserId:
+ *                      type: integer
+ *                      example: 144
+ *      responses:
+ *          '201':
+ *              description: Resource added successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 
+router.get('/post-all-comments', postsController.listPostComments)
+// Swagger documentation
+/**
+ * @swagger
+ * /posts/post-all-comments:
+ *   get:
+ *      description: Used to get a list of all comments in a specific post
+ *      tags:
+ *          - posts
+ *      parameters:
+ *          - in: query
+ *            name: postId
+ *            type: integer
+ *            description: Post id
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: Success
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
 module.exports = router;
